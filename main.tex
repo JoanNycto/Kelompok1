@@ -7,30 +7,30 @@
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
-\usepackage{fancyhdr}
+\usepackage{fancyhdr}	
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
 		T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 
 \fancypagestyle{firstpagestyle}{
-    \fancyhf{}
-    \renewcommand{\headrulewidth}{0pt}
-    \fancyfoot[L]{ 
-    $^1$mengikat data antara \textit{model} dan \textit{view} yang disinkronkan setiap terjadinya perubahan
-    }
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyfoot[L]{ 
+		$^1$mengikat data antara \textit{model} dan \textit{view} yang disinkronkan setiap terjadinya perubahan
+	}
 }
 
 \fancypagestyle{secondpagestyle}{
-    \fancyhf{}
-    \renewcommand{\headrulewidth}{0pt}
-    \fancyfoot[L]{ 
-    $^2$kode yang digunakan berulang-ulang tanpa perubahan yang signifikan 
-    
-    $^3$beban tambahan dalam proses komunikasi atau eksekusi
-    }
+	\fancyhf{}
+	\renewcommand{\headrulewidth}{0pt}
+	\fancyfoot[L]{ 
+		$^2$kode yang digunakan berulang-ulang tanpa perubahan yang signifikan 
+		
+		$^3$beban tambahan dalam proses komunikasi atau eksekusi
+	}
 }
 
 \bibliographystyle{unsrt}
-    
+
 \begin{document}
 	
 	\title{Perbandingan Performa Pola Arsitektur \textit{Model-View-Presenter} (MVP) dengan \textit{Model-View-ViewModel} (MVVM)\\
@@ -73,77 +73,81 @@
 	
 	\section{Pendahuluan}
 	Dalam dunia pengembangan perangkat lunak, pemilihan pola arsitektur sangatlah penting untuk memastikan keberhasilan proyek dan kualitas aplikasi yang dihasilkan. Dua pola arsitektur yang sering digunakan pengembangan aplikasi berbasis Android adalah \textit{Model-View-Presenter} (MVP) dan \textit{Model-View-ViewModel} (MVVM). 
- 
-    MVP dan MVVM memisahkan aplikasi menjadi tiga komponen utama, yaitu \textit{Model} (menyimpan data dan logika bisnis), \textit{View} (menampilkan antarmuka pengguna), dan \textit{Presenter} (menghubungkan \textit{Model} dan \textit{View} serta mengatur logika pengontrol) untuk MVP \cite{Dan2020}, sedangkan MVVM tidak menggunakan \textit{Presenter} namun \textit{ViewModel} yang bertanggung jawab untuk memisahkan logika presentasi dari \textit{Model} dan \textit{View}. MVVM sering digunakan dalam pengembangan aplikasi berbasis \textit{data binding}$^1$, terutama pada platform seperti Android dan iOS. 
+	
+	MVP dan MVVM memisahkan aplikasi menjadi tiga komponen utama, yaitu \textit{Model} (menyimpan data dan logika bisnis), \textit{View} (menampilkan antarmuka pengguna), dan \textit{Presenter} (menghubungkan \textit{Model} dan \textit{View} serta mengatur logika pengontrol) untuk MVP \cite{Dan2020}, sedangkan MVVM tidak menggunakan \textit{Presenter} namun \textit{ViewModel} yang bertanggung jawab untuk memisahkan logika presentasi dari \textit{Model} dan \textit{View}. MVVM sering digunakan dalam pengembangan aplikasi berbasis \textit{data binding}$^1$, terutama pada platform seperti Android dan iOS. 
 	
 	Meskipun MVP dan MVVM dapat memisahkan tanggung jawab antara \textit{model, view}, dan logika pengontrol (\textit{viewmodel}), kedua pola ini memiliki perbedaan dalam cara implementasinya. Permasalahan yang sering muncul adalah pemilihan pola yang tepat untuk aplikasi tertentu berdasarkan performa seperti responsifitas, kecepatan, dan penggunaan sumber daya, penggunaan memori, penggunaan CPU, stabilitas, fleksibilitas, kemudahan untuk diuji, dan pemeliharaan dalam jangka panjang.
 	
 	Tujuan dari penelitian ini adalah untuk membandingkan performa kecepatan dan memori antara pola arsitektur MVP dan MVVM. Melalui penelitian ini, diharapkan dapat memberikan pemahaman yang lebih baik mengenai kelebihan dan kekurangan dari kedua pola arsitektur dan memberikan pemahaman yang lebih mendalam mengenai perbandingan performa antara pola arsitektur MVP dan MVVM.
-
-    \thispagestyle{firstpagestyle}
+	
+	\thispagestyle{firstpagestyle}
 	
 	\section{Kajian Terkait}
 	\subsection{Pola Arsitektur MVP}
-	MVP adalah pola arsitektur dalam pembuatan software untuk berbagai platform, seperti desktop, website, dan mobile. Bahasa pemrograman seperti Java, C#, Swift, dan C++ dapat digunakan dalam membuat pola arsitektur MVP \cite{mfd2023}. MVP merupakan evolusi dari pola arsitektur \textit{Model-View-Controller} (MVC), yang lebih dahulu dikenal dan masih banyak digunakan pada saat ini \cite{Kom2022, Dan2020}. 
+	MVP adalah pola arsitektur dalam pembuatan software untuk berbagai platform, seperti desktop, website, dan mobile. Bahasa pemrograman seperti Java, C\#, Swift, dan C++ dapat digunakan dalam membuat pola arsitektur MVP \cite{mfd2023}. MVP merupakan evolusi dari pola arsitektur \textit{Model-View-Controller} (MVC), yang lebih dahulu dikenal dan masih banyak digunakan pada saat ini \cite{Kom2022, Dan2020}. 
 	
 	Pola arsitektur MVP terdiri dari tiga komponen utama, yaitu \textit{Model, View} dan \textit{Presenter}.
 	\textit{Model} menggambarkan komponen yang menangani data dan logika bisnis dalam sebuah aplikasi, serupa dengan fungsi model dalam MVC. Komponen ini bertugas mengolah, menyimpan, dan mengatur data, serta mengimplementasikan segala aturan bisnis yang diperlukan. Dalam struktur ini, model beroperasi secara independen dan tidak berinteraksi langsung dengan \textit{view} atau \textit{presenter}.
 	\textit{View} mewakili antarmuka pengguna dan lapisan presentasi aplikasi. Seperti tampilan di MVC, fungsi utamanya adalah menampilkan data yang diambil dari model. Namun, di MVP, tampilannya lebih pasif dan bergantung pada presenter untuk pembaruan dan penanganan input pengguna. Tampilan hanya berkomunikasi dengan presenter dan bukan dengan model.
 	\textit{Presenter} bertindak sebagai jembatan antara model dan tampilan, mengambil beberapa tanggung jawab pengontrol di MVC. \textit{Presenter} mengambil data dari model dan memperbarui tampilan, memastikan presentasi data yang benar \cite{Dan2020}. 
-
-    Salah satu keuntungan utama MVP adalah peningkatan pemisahan kekhawatiran antara tampilan (\textit{View}) dan \textit{Model}. Dengan pemisahan yang jelas antara komponen-komponen ini, pengembang dapat mengelola logika bisnis (\textit{Model}) secara terpisah dari tampilan pengguna \textit{View}. Hal ini meningkatkan keterbacaan dan pemeliharaan kode \cite{brp2020}. 
-
-    Selain itu, penggunaan \textit{Presenter} dalam pola MVP memfasilitasi kemampuan pengujian dan modularitas yang lebih baik. \textit{Presenter} bertindak sebagai perantara antara \textit{View} dan \textit{Model}, sehingga logika aplikasi dapat diuji secara terpisah dari antarmuka pengguna. Hal ini juga memungkinkan penggantian atau modifikasi komponen-komponen tanpa mempengaruhi bagian lainnya \cite{brp2020}.
-
-    MVP juga memiliki kemampuan untuk mengatasi aplikasi dengan persyaratan keadaan atau interaksi yang kompleks. Dengan pola MVP, pengembang dapat membagi tugas dan tanggung jawab secara terstruktur antara \textit{View, Model}, dan \textit{Presenter}, sehingga meningkatkan keteraturan dan stabilitas aplikasi \cite{brp2020}.
 	
-    Walaupun pola MVP menawarkan sejumlah keuntungan, pola MVP juga memiliki beberapa kerugian yang perlu ditimbangkan. Salah satu kerugian utama adalah kemungkinan terbentuknya basis kode yang lebih besar dibandingkan pola arsitektur lainnya. Hal ini disebabkan oleh \textit{Presenter} yang bertanggung jawab atas logika aplikasi, yang dapat mengakibatkan kebutuhan akan lebih banyak kode \textit{boilerplate}$^2$ untuk menghubungkan \textit{Presenter} dengan \textit{View} dan \textit{Model} \cite{brp2020}.
-
-    Selain itu, MVP juga memiliki potensi  \textit{overhead}$^3$ dalam komunikasi antar komponen. \textit{Presenter} harus mengelola interaksi antara  \textit{View} dan \textit{Model}, yang dapat menambah kompleksitas dan mengurangi efisiensi dalam komunikasi antar bagian aplikasi. Hal ini dapat mempengaruhi kinerja aplikasi secara keseluruhan \cite{brp2020}.
-
-    Secara keseluruhan, pola arsitektur MVP memberikan landasan yang kuat bagi pengembangan aplikasi yang terstruktur, mudah diuji, dan mudah dipelihara. Namun, pola MVP lebih kompleks dibandingkan pola-pola arsitektur lainnya.
-
-    \thispagestyle{secondpagestyle}
- 
+	Salah satu keuntungan utama MVP adalah peningkatan pemisahan kekhawatiran antara tampilan (\textit{View}) dan \textit{Model}. Dengan pemisahan yang jelas antara komponen-komponen ini, pengembang dapat mengelola logika bisnis (\textit{Model}) secara terpisah dari tampilan pengguna \textit{View}. Hal ini meningkatkan keterbacaan dan pemeliharaan kode \cite{brp2020}. 
+	
+	Selain itu, penggunaan \textit{Presenter} dalam pola MVP memfasilitasi kemampuan pengujian dan modularitas yang lebih baik. \textit{Presenter} bertindak sebagai perantara antara \textit{View} dan \textit{Model}, sehingga logika aplikasi dapat diuji secara terpisah dari antarmuka pengguna. Hal ini juga memungkinkan penggantian atau modifikasi komponen-komponen tanpa mempengaruhi bagian lainnya \cite{brp2020}.
+	
+	MVP juga memiliki kemampuan untuk mengatasi aplikasi dengan persyaratan keadaan atau interaksi yang kompleks. Dengan pola MVP, pengembang dapat membagi tugas dan tanggung jawab secara terstruktur antara \textit{View, Model}, dan \textit{Presenter}, sehingga meningkatkan keteraturan dan stabilitas aplikasi \cite{brp2020}.
+	
+	Walaupun pola MVP menawarkan sejumlah keuntungan, pola MVP juga memiliki beberapa kerugian yang perlu ditimbangkan. Salah satu kerugian utama adalah kemungkinan terbentuknya basis kode yang lebih besar dibandingkan pola arsitektur lainnya. Hal ini disebabkan oleh \textit{Presenter} yang bertanggung jawab atas logika aplikasi, yang dapat mengakibatkan kebutuhan akan lebih banyak kode \textit{boilerplate}$^2$ untuk menghubungkan \textit{Presenter} dengan \textit{View} dan \textit{Model} \cite{brp2020}.
+	
+	Selain itu, MVP juga memiliki potensi  \textit{overhead}$^3$ dalam komunikasi antar komponen. \textit{Presenter} harus mengelola interaksi antara  \textit{View} dan \textit{Model}, yang dapat menambah kompleksitas dan mengurangi efisiensi dalam komunikasi antar bagian aplikasi. Hal ini dapat mempengaruhi kinerja aplikasi secara keseluruhan \cite{brp2020}.
+	
+	Secara keseluruhan, pola arsitektur MVP memberikan landasan yang kuat bagi pengembangan aplikasi yang terstruktur, mudah diuji, dan mudah dipelihara. Namun, pola MVP lebih kompleks dibandingkan pola-pola arsitektur lainnya.
+	
+	\thispagestyle{secondpagestyle}
+	
 	\subsection{Pola Arsitektur MVVM}
 	Pola MVVM pemisahan antarmuka pengguna (UI) dan logika bisnis dengan lancar dalam aplikasi modern \cite{Kom2022,Car2022}. Aplikasi lebih mudah untuk diuji, dipelihara, dan dikembangkan ketika logika aplikasi dan antarmuka pengguna dipisahkan dengan jelas. Hal ini membantu memecahkan banyak tantangan pembangunan. Selain itu, hal ini dapat sangat meningkatkan kemungkinan penggunaan kembali kode dan menyediakan komunikasi yang lebih mudah antara perancang dan pengembang UI saat mereka mengerjakan komponen program yang berbeda \cite{michael2023}. 
 	
 	MVVM memisahkan perangkat lunak menjadi tiga komponen utama, yaitu \textit{Model, View} dan \textit{ViewModel}. \textit{Model} mewakili struktur data dan logika bisnis dari aplikasi. \textit{Model} berisi data yang digunakan oleh aplikasi bisnis yang diperlukan untuk mengubah data serta data yang digunakan aplikasi. Antarmuka pengguna dan cara data ditampilkan tidak diketahui oleh \textit{model}.
 	\textit{View} adalah bagian antarmuka pengguna yang terlihat oleh pengguna. \textit{View} menampilkan data model dan menerima input pengguna. Di lingkungan web, \textit{view} mungkin berupa halaman HTML atau komponen UI lainnya yang ditampilkan kepada pengguna.
 	\textit{ViewModel} berfungsi sebagai perantara antara \textit{model} dan \textit{view}. Ini mempersiapkan data \textit{model} agar sesuai dengan persyaratan presentasi tampilan. \textit{ViewModel} juga menangani interaksi antara \textit{view} dan \textit{model}. Secara kontekstual, \textit{ViewModel} mengelola logika tampilan, yang mencakup tindakan seperti validasi input, penanganan kejadian UI, dan pengelolaan status \cite{Martin2024}.
-
-    Salah satu keuntungan dari pola MVVM adalah kemudahan dalam pemeliharaan kode. MVVM memungkinkan pengembang untuk merilis versi terbaru aplikasi dengan fitur baru secara berkala tanpa mengganggu keseluruhan kode aplikasi. Hal ini membuat proses pemeliharaan aplikasi menjadi lebih mudah dan terorganisir \cite{Martin2024}.
-
-    Selain itu, MVVM memungkinkan pengembang untuk mengganti atau menambahkan kode baru ke dalam program dengan lebih fleksibel. Penggunaan \textit{ViewModel} sebagai perantara antara \textit{View} dan \textit{Model} memungkinkan pengembang untuk memisahkan logika \textit{Model} dan \textit{View} sehingga memfasilitasi perubahan dan penambahan fungsionalitas dengan lebih efisien \cite{michael2023}.
-
-    Keuntungan lain dari MVVM adalah kemampuan untuk melakukan pengujian unit secara terpisah untuk \textit{ViewModel} dan \textit{Model}, tanpa perlu menggunakan \textit{View}. Hal ini memungkinkan pengembang untuk menjalankan pengujian fungsionalitas model tampilan dengan cara yang sama seperti \textit{View}, bahkan dapat meningkatkan kualitas dan ketahanan aplikasi \cite{michael2023}.
-
-    Pola MVVM juga memungkinkan desainer dan pengembang aplikasi untuk bekerja secara independen dan bersamaan pada komponen. Desainer dapat berfokus pada desain tampilan yang estetis, sementara pengembang dapat bekerja pada model tampilan dan komponen model secara terpisah. Hal ini membuat kolaborasi yang lebih baik antara tim, meningkatkan efisiensi, dan kualitas pengembangan \cite{michael2023}. 
- 
-    Di sisi lain, pola MVVM tidak terlalu cocok untuk proyek kecil atau aplikasi dengan tampilan yang sederhana. Pola ini dianggap berlebihan untuk aplikasi dengan kompleksitas yang rendah, sehingga penggunaanya tidak efisien dalam konteks tersebut \cite{Maulana2022}.
-
-    Pola MVVM juga memiliki kompleksitas dalam \textit{data binding}. Meskipun \textit{data binding} adalah salah satu fitur yang kuat dalam MVVM, kompleksitasnya dapat membuat pengembang kesulitan dalam melakukan \textit{debugging}. Menemukan dan memperbaiki bug atau error pada aplikasi terkait dengan \textit{data binding} menjadi lebih sulit karena keterkaitan yang kompleks antara komponen-komponen MVVM \cite{Maulana2022}.
-
-    Secara keseluruhan, MVVM dapat memberikan manfaat signifikan dalam pemeliharaan dan pengembangan aplikasi namun tidak cocok untuk proyek kecil atau aplikasi sederhana.
+	
+	Salah satu keuntungan dari pola MVVM adalah kemudahan dalam pemeliharaan kode. MVVM memungkinkan pengembang untuk merilis versi terbaru aplikasi dengan fitur baru secara berkala tanpa mengganggu keseluruhan kode aplikasi. Hal ini membuat proses pemeliharaan aplikasi menjadi lebih mudah dan terorganisir \cite{Martin2024}.
+	
+	Selain itu, MVVM memungkinkan pengembang untuk mengganti atau menambahkan kode baru ke dalam program dengan lebih fleksibel. Penggunaan \textit{ViewModel} sebagai perantara antara \textit{View} dan \textit{Model} memungkinkan pengembang untuk memisahkan logika \textit{Model} dan \textit{View} sehingga memfasilitasi perubahan dan penambahan fungsionalitas dengan lebih efisien \cite{michael2023}.
+	
+	Keuntungan lain dari MVVM adalah kemampuan untuk melakukan pengujian unit secara terpisah untuk \textit{ViewModel} dan \textit{Model}, tanpa perlu menggunakan \textit{View}. Hal ini memungkinkan pengembang untuk menjalankan pengujian fungsionalitas model tampilan dengan cara yang sama seperti \textit{View}, bahkan dapat meningkatkan kualitas dan ketahanan aplikasi \cite{michael2023}.
+	
+	Pola MVVM juga memungkinkan desainer dan pengembang aplikasi untuk bekerja secara independen dan bersamaan pada komponen. Desainer dapat berfokus pada desain tampilan yang estetis, sementara pengembang dapat bekerja pada model tampilan dan komponen model secara terpisah. Hal ini membuat kolaborasi yang lebih baik antara tim, meningkatkan efisiensi, dan kualitas pengembangan \cite{michael2023}. 
+	
+	Di sisi lain, pola MVVM tidak terlalu cocok untuk proyek kecil atau aplikasi dengan tampilan yang sederhana. Pola ini dianggap berlebihan untuk aplikasi dengan kompleksitas yang rendah, sehingga penggunaanya tidak efisien dalam konteks tersebut \cite{Maulana2022}.
+	
+	Pola MVVM juga memiliki kompleksitas dalam \textit{data binding}. Meskipun \textit{data binding} adalah salah satu fitur yang kuat dalam MVVM, kompleksitasnya dapat membuat pengembang kesulitan dalam melakukan \textit{debugging}. Menemukan dan memperbaiki bug atau error pada aplikasi terkait dengan \textit{data binding} menjadi lebih sulit karena keterkaitan yang kompleks antara komponen-komponen MVVM \cite{Maulana2022}.
+	
+	Secara keseluruhan, MVVM dapat memberikan manfaat signifikan dalam pemeliharaan dan pengembangan aplikasi namun tidak cocok untuk proyek kecil atau aplikasi sederhana.
 	
 	\subsection{Studi Literatur}
 	Penelitian "\textit{Performance Comparison of Native Android Application on MVP and MVVM}" \cite{Wis2020} membandingkan performa antara pola arsitektur MVP dan MVVM dalam aplikasi Android. Performa diukur dari tiga aspek, yaitu penggunaan CPU, penggunaan memori, dan waktu eksekusi. Eksperimen dilakukan dengan menjalankan MVP dan MVVM pada perangkat Android. Setiap pengujian dimonitor menggunakan "Snapdragon Profiler" dan hasil tersebut akan dieksport menjadi CSV. Pengujian dilakukan berdasarkan dua skenario, yaitu uji kasus dan volume data. Setiap skenario dilakukan sebanyak 5 kali dan hasil dari pengujian tersebut akan dirata-ratakan. Berdasarkan pengujian yang dilakukan, penggunaan CPU pada MVVM lebih rendah dengan perbedaan rata-rata 0,55\%, waktu eksekusi MVVM lebih cepat dengan perbedaan rata-rata 126,21 ms, dan penggunaan memori pada MVP lebih rendan dengan perbedaan rata-rata sebesar 0,92 Mb. Dari eksperimen tersebut, dapat disimpulkan bahwa MVVM memiliki performa yang lebih baik dalam penggunaan CPU dan waktu eksekusi, sedangkan MVP memiliki performa yang lebih baik dalam penggunaan memori.
- 
+	
+	\textbf{\textcolor{red}{Kalau bisa dibuat table perbandingannya}}
+	
 	Penelitian "Analisis Perbandingan Implementasi Clean Architecture Menggunakan Design Pattern MVP, MVI, Dan MVVM Pada Pengembangan Aplikasi Android Native" \cite{Fir2024} melakukan perbandingan modifiabilitas, testabilitas, dan performa berdasarkan skenario tertentu. Berdasarkan aspek yang telah diuji, MVI unggul dalam hal testabilitas, MVVM dalam hal modifiabilitas, dan MVP dalam hal performa.
- 
+	
 	Penelitian "\textit{Analysis of Architectural Patterns for Android Development}" \cite{Akh2021} membandingkan tentang lima pola arsitektur yaitu MVC, MVP, MVVM, Viper, dan \textit{Clean Architecture}. Penelitian ini membandingkan kemampuan pengujian, pemeliharaan, dan penggunaan kembali. MVP memudahkan pengujian unit dan pemisahan yang jelas antara komponen-komponen, sedangkan MVVM menawarkan manajemen UI yang lebih baik, namun memerlukan banyak kode. Pada sisi lain, semakin banyak fungsionalitas yang ditambahkan, membuat MVC lebih susah dikenali.
- 
-    Penelitian "\textit{REVIEW OF IOS ARCHITECTURAL PATTERN FOR
-    TESTABILITY, MODIFIABILITY, AND PERFORMANCE QUALITY}" \cite{fz2019} memperkenalkan pentingnya pemilihan pola arsitektur yang tepat untuk pengembangan aplikasi iOS. Pengujian pola arsitektur berdasarkan kualitas uji (\textit{testability}), kemampuan untuk dimodifikasi (\textit{modifiability}), dan performa aplikasi yang optimal. Pengujian kualitas uji berdasarkan tiga parameter yaitu uji global (\textit{globat test effort}), kemampuan pengendalian (\textit{controllability}), dan kemampuan observasi (\textit{observability}). Hasil dari pengujian ini adalah MVVM memiliki baris kode yang lebih sedikit daripada pola arsitektur lainnya karena \textit{data binding} di \textit{ViewModel}. Waktu pengujian paling cepat juga dimiliki oleh MVVM dengan kecepatan 19.6 detik dibanding MVP 20.9 detik. Pada kemampuan untuk dimodifikasi, MVVM memiliki kemampuan kohesi terbaik degan 0,55 \textit{procedural} dibanding MVP yaitu 0,3809 dan merupakan terendah diantara empat pola arsitektur (MVP, MVC, MVVM, dan VIPER). Pada uji performa, dua pengujian dilakukan yaitu penggunaan memori dan CPU. MVVM menggunakan memori paling sedikit yaitu 21,19275 Mb dibanding MVP yaitu 22,9645 Mb. Sedangkan dalam penggunaan CPU, MVVM menggunakan CPU kedua paling banyak yaitu 11,615\%. Berdasarkan pengujian yang telah dilakukan, MVVM dan VIPER merupakan dua pola arsitektur terbaik.
+	
+	Penelitian "\textit{REVIEW OF IOS ARCHITECTURAL PATTERN FOR
+		TESTABILITY, MODIFIABILITY, AND PERFORMANCE QUALITY}" \cite{fz2019} memperkenalkan pentingnya pemilihan pola arsitektur yang tepat untuk pengembangan aplikasi iOS. Pengujian pola arsitektur berdasarkan kualitas uji (\textit{testability}), kemampuan untuk dimodifikasi (\textit{modifiability}), dan performa aplikasi yang optimal. Pengujian kualitas uji berdasarkan tiga parameter yaitu uji global (\textit{globat test effort}), kemampuan pengendalian (\textit{controllability}), dan kemampuan observasi (\textit{observability}). Hasil dari pengujian ini adalah MVVM memiliki baris kode yang lebih sedikit daripada pola arsitektur lainnya karena \textit{data binding} di \textit{ViewModel}. Waktu pengujian paling cepat juga dimiliki oleh MVVM dengan kecepatan 19.6 detik dibanding MVP 20.9 detik. Pada kemampuan untuk dimodifikasi, MVVM memiliki kemampuan kohesi terbaik degan 0,55 \textit{procedural} dibanding MVP yaitu 0,3809 dan merupakan terendah diantara empat pola arsitektur (MVP, MVC, MVVM, dan VIPER). Pada uji performa, dua pengujian dilakukan yaitu penggunaan memori dan CPU. MVVM menggunakan memori paling sedikit yaitu 21,19275 Mb dibanding MVP yaitu 22,9645 Mb. Sedangkan dalam penggunaan CPU, MVVM menggunakan CPU kedua paling banyak yaitu 11,615\%. Berdasarkan pengujian yang telah dilakukan, MVVM dan VIPER merupakan dua pola arsitektur terbaik.
+	
+	\textbf{\textcolor{red}{Tambahkan table perbandingannya}}
 	
 	\section{Metodologi}
-
+	
 	
 	\section{Hasil dan Pembahasan}
-
+	
 	
 	\section{Kesimpulan}
 	
-\bibliography{reference.bib}
-
+	\bibliography{reference.bib}
+	
 \end{document}
