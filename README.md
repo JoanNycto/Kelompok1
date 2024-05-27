@@ -2,7 +2,7 @@
 Allycia Joan Micheline - 2210101006 <br>
 nehe <br>
 sibgah <br>
-noven 
+Noven - 2210101024
 
 ------------------------------------------------------------------
 Folder kelompok1 merupakan makalah <br>
