@@ -1,10 +1,10 @@
-KELOMPOK 1
-Allycia Joan Micheline - 2210101006
-nehe
-sibgah
-noven
+# KELOMPOK 1 <br>
+Allycia Joan Micheline - 2210101006 <br>
+nehe <br>
+sibgah <br>
+noven 
 
 ------------------------------------------------------------------
-Folder kelompok1 merupakan makalah
-Folder mvc-mvp-mvvm main merupakan kode
-Folder uml merupakan kode dan gambar uml
+Folder kelompok1 merupakan makalah <br>
+Folder mvc-mvp-mvvm main merupakan kode <br>
+Folder uml merupakan kode dan gambar uml 
