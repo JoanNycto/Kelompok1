@@ -1,0 +1,69 @@
+@startuml
+actor User
+participant TestMVPApp
+participant View
+participant Model
+participant Presenter
+participant JSpinner
+participant File
+
+User -> TestMVPApp: main(String[] args)
+activate TestMVPApp
+TestMVPApp -> File: deleteIfExists(OUTPUT_FILE)
+TestMVPApp -> File: writeString(OUTPUT_FILE, header)
+TestMVPApp -> TestMVPApp: performMeasurement(i)
+activate TestMVPApp
+
+loop for each viewTotal in viewTotalList
+    TestMVPApp -> View: new View()
+    activate View
+    TestMVPApp -> Model: new Model(id)
+    activate Model
+    TestMVPApp -> Presenter: new Presenter()
+    activate Presenter
+    Presenter -> Model: setModel(model)
+    Presenter -> View: setView(view)
+    View -> View: setName(name)
+    View -> View: setTitle(title)
+    View -> View: getContentPane().removeAll()
+    View -> View: setDefaultCloseOperation(View.DISPOSE_ON_CLOSE)
+    
+    loop for each spinnerTotal in spinnerTotalList
+        loop for each spinner in viewTotal
+            View -> JSpinner: new JSpinner()
+            activate JSpinner
+            JSpinner -> Presenter: addChangeListener(presenter)
+            View -> JSpinner: new JSpinner() (outputSpinner)
+            activate JSpinner
+            JSpinner -> JSpinner: setEnabled(false)
+            JSpinner -> View: addChangeListener(outputSpinner)
+        end
+
+        View -> View: setVisible(true)
+        
+        loop for each spinner in spinnerTotal
+            TestMVPApp -> JSpinner: setValue(value)
+            JSpinner -> Presenter: stateChanged(ChangeEvent)
+            activate Presenter
+            Presenter -> Model: getValue()
+            activate Model
+            Model -> Presenter: return value
+            deactivate Model
+            Presenter -> View: update outputSpinner
+            deactivate Presenter
+
+            Presenter -> TestMVPApp: update deltaTime and deltaMemory
+            TestMVPApp -> File: writeString(OUTPUT_FILE, data)
+            deactivate JSpinner
+        end
+        
+        View -> View: dispose()
+    end
+    
+    deactivate Presenter
+    deactivate Model
+    deactivate View
+end
+
+deactivate TestMVPApp
+@enduml

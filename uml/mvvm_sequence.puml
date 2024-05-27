@@ -1,0 +1,50 @@
+@startuml
+
+participant TestMVVMApp
+participant View
+participant ViewModel
+participant Binder
+participant JSpinner
+participant ViewModelProperty
+participant Model
+
+activate TestMVVMApp
+TestMVVMApp -> TestMVVMApp: main(String[])
+TestMVVMApp -> TestMVVMApp: performMeasurement(int)
+activate View
+TestMVVMApp -> View: create
+View -> ViewModel: setModel
+activate ViewModel
+ViewModel -> Model: getModel
+ViewModel -> Model: setModel
+deactivate ViewModel
+View -> View: setVisible
+View -> ViewModel: getViewModelProperties
+activate ViewModel
+ViewModel --> View: viewModelProperties
+deactivate ViewModel
+View -> Binder: create
+activate Binder
+Binder -> Binder: bind
+View -> Binder: create
+View -> Binder: create
+View -> Binder: create
+View -> Binder: create
+Binder -> JSpinner: setValue
+activate JSpinner
+JSpinner -> Binder: stateChanged
+Binder -> ViewModelProperty: update
+activate ViewModelProperty
+ViewModelProperty -> ViewModel: getViewModelProperties
+ViewModelProperty --> Binder: updated value
+deactivate ViewModelProperty
+activate ViewModel
+ViewModel --> Model: get
+deactivate ViewModel
+JSpinner --> TestMVVMApp: write to file
+deactivate JSpinner
+deactivate Binder
+deactivate View
+deactivate TestMVVMApp
+
+@enduml

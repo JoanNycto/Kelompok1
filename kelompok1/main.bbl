@@ -1,0 +1,84 @@
+\begin{thebibliography}{10}
+
+\bibitem{Dan2020}
+Dan~Dan Li and Xiao~Yan Liu.
+\newblock Research on mvp design pattern modeling based on mda.
+\newblock {\em Procedia Computer Science}, 166:51--56, 2020.
+\newblock Proceedings of the 3rd International Conference on Mechatronics and
+  Intelligent Robotics (ICMIR-2019).
+
+\bibitem{mfd2023}
+Muhammad~Fauzi Dwikurnia, Monterico Adrian, and Shinta~Yulia Puspitasari.
+\newblock Optimasi kinerja aplikasi mobile berbasis flutter menggunakan pola
+  arsitektur mvp (model-view-presenter) dan state management getx.
+\newblock {\em Jurnal Tugas AKhir Fakultas Informatika}, Aug 2023.
+
+\bibitem{Kom2022}
+Sirojiddin Komolov, Gcinizwe Dlamini, Swati Megha, and Manuel Mazzara.
+\newblock Towards predicting architectural design patterns: A machine learning
+  approach.
+\newblock {\em Computers}, 11(10), 2022.
+
+\bibitem{brp2020}
+Bahrur Rizki~Putra Surya, Agi~Putra Kharisma, and Novanto Yudistira.
+\newblock Perbandingan kinerja pola perancangan mvc, mvp, dan mvvm pada
+  aplikasi berbasis android (studi kasus : Aplikasi laporan hasil belajar siswa
+  sma bss).
+\newblock {\em Jurnal Pengembangan Teknologi Informasi dan Ilmu Komputer},
+  4(11), Nov 2020.
+
+\bibitem{Car2022}
+SAMPAYO-RODRÍGUEZ, Carmen Jeannette, GONZÁLEZ-AMBRIZ, Rosalba,
+  GONZÁLEZ-MARTÍNEZ, Blanca Areli, ALDANA-HERRERA, and Jonathan.
+\newblock Processor and memory performance with design patterns in a native
+  android application.
+\newblock {\em Journal of Applied Computing}, 6(18):53--61, 2022.
+
+\bibitem{michael2023}
+michaelstonis.
+\newblock Model-view-viewmodel - .net, Jun 2023.
+
+\bibitem{Martin2024}
+Matius Martin.
+\newblock Mvc vs mvvm – perbedaan antara keduanya, Feb 2024.
+
+\bibitem{Maulana2022}
+Fikri Maulana, Rita Afyenni, and Aldo Erianda.
+\newblock Aplikasi manajemen laboratorium menggunakan metode mvvm berbasis
+  android.
+\newblock {\em JITSI : Jurnal Ilmiah Teknologi Sistem Informasi},
+  3(3):88–93, Sep 2022.
+
+\bibitem{Wis2020}
+Bambang Wisnuadhi, Ghifari Munawar, and Ujang Wahyu.
+\newblock Performance comparison of native android application on mvp and mvvm.
+\newblock In {\em Proceedings of the International Seminar of Science and
+  Applied Technology (ISSAT 2020)}, pages 276--282. Atlantis Press, 2020.
+
+\bibitem{Fir2024}
+Firmansyah~Firdaus Anhar, Made Hanindia~Prami Swari, and Firza~Prima Aditiawan.
+\newblock Analisis perbandingan implementasi clean architecture menggunakan
+  mvp, mvi, dan mvvm pada pengembangan aplikasi android native.
+\newblock {\em Jupiter (Publikasi Ilmu Keteknikan Industri, Teknik Elektro dan
+  Informatika)}, 2(2):181--191, 2024.
+
+\bibitem{Akh2021}
+Nayab Akhtar and Sana Ghafoor.
+\newblock Analysis of architectural patterns for android development.
+\newblock June 2021.
+
+\bibitem{fz2019}
+FAUZI SHOLICHIN, MOHD ADHAM~BIN ISA, SHAHLIZA~ABD HALIM, and MUHAMMAD
+  FIRDAUS~BIN HARUN.
+\newblock Review of ios architectural pattern for testability, modifiability,
+  and performance quality.
+\newblock {\em Journal of Theoretical and Applied Information Technolgy}, Aug
+  2019.
+
+\bibitem{ri2023}
+Irya~Muhammad Riyadhi, Intan Purnamasari, and Kamal Prihandani.
+\newblock Penerapan pola arsitektur mvvm pada perancangan aplikasi pengaduan
+  masyarakat berbasis android.
+\newblock {\em INFOTECH journal}, 9(1):147–158, May 2023.
+
+\end{thebibliography}

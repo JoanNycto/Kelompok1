@@ -1,0 +1,93 @@
+@startuml
+package test.mvvm {
+    class TestMVVMApp {
+        - String OUTPUT_FILE
+        - int NUMBER_OF_VIEWS
+        - int NUMBER_OF_SPINNER
+        - int DIVIDER
+        + void main(String[] args)
+        + void performMeasurement(int iteration)
+    }
+
+    class Model {
+        - String name
+        + Model(String name)
+    }
+
+    class ViewModel {
+        - Model model
+        - Map<String, ViewModelProperty> properties
+        + void setModel(Model model)
+        + Map<String, ViewModelProperty> getViewModelProperties()
+    }
+
+    class View {
+        - String name
+        - String title
+        + void setName(String name)
+        + void setTitle(String title)
+        + void getContentPane()
+        + void setDefaultCloseOperation(int operation)
+        + void setVisible(boolean visible)
+        + void dispose()
+    }
+
+    class JSpinner {
+        - String name
+        + void setName(String name)
+        + void setValue(int value)
+        + Object getValue()
+        + void setEnabled(boolean enabled)
+        + void addChangeListener(ChangeListener listener)
+        + DefaultEditor getEditor()
+    }
+
+    class Binder {
+        + Binder(JSpinner spinner, ViewModelProperty property)
+    }
+
+    class ViewModelProperty {
+        - String name
+        - ViewModel viewModel
+        + ViewModelProperty(String name, ViewModel viewModel)
+    }
+
+    interface ChangeListener {
+        + void stateChanged(ChangeEvent event)
+    }
+
+    class ChangeEvent {
+        - Object source
+        + ChangeEvent(Object source)
+    }
+
+    class DefaultEditor {
+        + JTextField getTextField()
+    }
+
+    class JTextField {
+        + void setColumns(int columns)
+    }
+
+    TestMVVMApp --> Model : uses
+    TestMVVMApp --> ViewModel : uses
+    TestMVVMApp --> View : uses
+    TestMVVMApp --> JSpinner : uses
+    TestMVVMApp --> Binder : uses
+    TestMVVMApp --> ViewModelProperty : uses
+    TestMVVMApp --> ChangeListener : implements
+    
+    ViewModel --> Model : has
+    ViewModel --> ViewModelProperty : manages
+    View --> JSpinner : contains
+    JSpinner --> ChangeListener : notifies
+    JSpinner --> DefaultEditor : contains
+    DefaultEditor --> JTextField : contains
+    Binder --> JSpinner : binds
+    Binder --> ViewModelProperty : binds
+    ViewModelProperty --> ViewModel : part of
+
+    ChangeListener <|.. TestMVVMApp$1 : inner class
+}
+
+@enduml

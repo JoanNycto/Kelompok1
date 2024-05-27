@@ -1,0 +1,37 @@
+@startuml
+class TestMVPApp {
+    +main(String[] args)
+    -performMeasurement(int iteration)
+}
+
+class Model {
+    -String id
+    +Model(String id)
+    +String getId()
+    +void setId(String id)
+}
+
+class View {
+    -String name
+    -String title
+    +void setName(String name)
+    +void setTitle(String title)
+    +Container getContentPane()
+    +void setDefaultCloseOperation(int operation)
+    +void setVisible(boolean visible)
+    +void dispose()
+}
+
+class Presenter {
+    -Model model
+    -View view
+    +void setModel(Model model)
+    +void setView(View view)
+}
+
+TestMVPApp --> Model
+TestMVPApp --> View
+TestMVPApp --> Presenter
+Presenter --> Model
+Presenter --> View
+@enduml
